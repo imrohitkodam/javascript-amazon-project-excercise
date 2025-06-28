@@ -1,0 +1,19 @@
+{
+  "editor.quickSuggestions": {
+    "comments": "false",
+    "strings": "false",
+    "other": "off"
+  },
+  "editor.suggestOnTriggerCharacters": false,
+  "editor.parameterHints.enabled": false,
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "workbench.settings.showSuggestions": false,
+  "emmet.showSuggestionsAsSnippets": false,
+  "editor.inlineSuggest.edits.showCollapsed": false,
+  "editor.suggest.preview": true,
+  "terminal.integrated.suggest.enabled": false,
+  "terminal.integrated.suggest.upArrowNavigatesHistory": false,
+  "emmet.useInlineCompletions": true,
+  "terminal.integrated.suggest.suggestOnTriggerCharacters": false
+}

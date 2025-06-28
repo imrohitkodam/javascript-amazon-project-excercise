@@ -1,3 +1,6 @@
+import {cart, addToCart} from '../data/cart.js';
+import { products } from '../data/products.js';
+
 let productHtml = "";
 products.forEach((products) => {
 productHtml += `<div class="product-container">
@@ -37,6 +40,8 @@ productHtml += `<div class="product-container">
             </select>
           </div>
 
+          ${products.extraInfo()} 
+
           <div class="product-spacer"></div>
 
           <div class="added-to-cart js-addedto-cart-${products.id}">
@@ -48,43 +53,48 @@ productHtml += `<div class="product-container">
             Add to Cart
           </button>
         </div>`
-        // console.log(html)
 });
 
+          //${products.extraInfo()} 
+          // Polymmorphic function to display extra information based on product type isko define nahi karna padega ki konse 
+          // class ka hai it might be a book or a movie or a music album koi bhi case ho sakta hai hum 
+          // isko change kare bina use kar sakte hain 
 
 document.querySelector(".js-products-html").innerHTML = productHtml;
 
-document.querySelectorAll(".add-to-cart-button").forEach((button) => {
-button.addEventListener("click", () => {
-  const productId = button.dataset.productId;
+// // Funtion to add to cart button and increase quantity by 1
+// function addToCart(productId) {
+//   let matchingItem;
 
-  let matchingItem;
+//   cart.forEach((item) => {
+//     if (item.productId === productId) {
+//       matchingItem = item;
+//     }
+//   });
 
-  cart.forEach((item) => {
-  if (item.productId === productId) {
-    matchingItem = item;
-  }
-});
+//   let totalQuantity = document.querySelector(`.js-quantity-selector-${productId}`);
+//   let quantity = Number(totalQuantity.value);
 
-  let totalQuantity = document.querySelector(`.js-quantity-selector-${productId}`);
-  let quantity = Number(totalQuantity.value);
+//   if(matchingItem)
+//   {
+//     matchingItem.quantity++;
+//   }
+//   else
+//   {
+//       cart.push({
+//       productId : productId,
+//       quantity : quantity});
+//   }
+// }
 
-  if(matchingItem)
-  {
-    matchingItem.quantity++;
-  }
-  else
-  {
-      cart.push({
-      productId : productId,
-      quantity : quantity});
-  }
-
+// Function is for addtocart dropdown increase quantity by what choose form dropdown
+export function updateCartQuantity(productId){
   let cartQuantity = 0;
 
   cart.forEach((item) => {
     cartQuantity += item.quantity;
   });
+
   document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
 
   const addedMsg = document.querySelector(`.js-addedto-cart-${productId}`);
@@ -93,5 +103,12 @@ button.addEventListener("click", () => {
   setTimeout(() => {
     addedMsg.classList.remove("js-show-added-msg");
   }, 1500);
+}
+
+document.querySelectorAll(".add-to-cart-button").forEach((button) => {
+button.addEventListener("click", () => {
+  const productId = button.dataset.productId;
+  addToCart(productId)
+  updateCartQuantity(productId);
 });
 });
